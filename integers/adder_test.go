@@ -15,6 +15,7 @@ func TestAdder(t *testing.T) {
   }
 }
 
+// Add takes two integers and returns the sum of them.
 func ExampleAdd() {
   sum := Add(1, 5)
   fmt.Println(sum)
