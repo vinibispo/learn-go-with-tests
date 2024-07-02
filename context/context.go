@@ -6,11 +6,13 @@ import (
 )
 
 type Store interface {
-  Fetch() string
+	Fetch() string
+	Cancel()
 }
 
 func Server(store Store) http.HandlerFunc {
-  return func(w http.ResponseWriter, r *http.Request) {
-    fmt.Fprint(w, store.Fetch())
-  }
+	return func(w http.ResponseWriter, r *http.Request) {
+		store.Cancel()
+		fmt.Fprint(w, store.Fetch())
+	}
 }
