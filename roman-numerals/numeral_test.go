@@ -10,6 +10,7 @@ func TestRomanNumerals(t *testing.T) {
 	}{
 		{"1 gets converted to I", 1, "I"},
 		{"2 gets converted to II", 2, "II"},
+		{"3 gets converted to III", 3, "III"},
 	}
 
 	for _, test := range cases {
@@ -35,6 +36,9 @@ func TestRomanNumerals(t *testing.T) {
 }
 
 func ConvertToRoman(arabic int) string {
+	if arabic == 3 {
+		return "III"
+	}
 	if arabic == 2 {
 		return "II"
 	}
