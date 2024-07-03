@@ -54,12 +54,13 @@ func TestHoursInRadians(t *testing.T) {
 		{simpleTime(6, 0, 0), math.Pi},
 		{simpleTime(0, 0, 0), 0},
 		{simpleTime(21, 0, 0), math.Pi * 1.5},
+		{simpleTime(0, 1, 30), math.Pi / ((6 * 60 * 60) / 90)},
 	}
 
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			got := hoursInRadians(c.time)
-			if got != c.angle {
+			if !roughlyEqualFloat64(got, c.angle) {
 				t.Fatalf("Wanted %f radians, but got %v", c.angle, got)
 			}
 		})
