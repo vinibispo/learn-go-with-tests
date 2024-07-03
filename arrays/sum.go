@@ -1,26 +1,20 @@
 package main
 
 func Sum(numbers []int) int {
-  var sum int
-  
-  for _, number := range numbers {
-    sum += number
-  }
+	add := func(acc, x int) int { return acc + x }
 
-  return sum
+	return Reduce(numbers, add, 0)
 }
 
-func SumAllTails(numbersToSum ...[]int) []int {
-  var sums []int
+func SumAllTails(numbers ...[]int) []int {
+	sumTail := func(acc, x []int) []int {
+		if len(x) == 0 {
+			return append(acc, 0)
+		} else {
+			tail := x[1:]
+			return append(acc, Sum(tail))
+		}
+	}
 
-  for _, numbers := range numbersToSum {
-    if len(numbers) == 0 {
-      sums = append(sums, 0)
-    } else {
-      tail := numbers[1:]
-      sums = append(sums, Sum(tail))
-    }
-  }
-
-  return sums
+	return Reduce(numbers, sumTail, []int{})
 }
