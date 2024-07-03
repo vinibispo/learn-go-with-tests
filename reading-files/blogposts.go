@@ -3,14 +3,13 @@ package blogposts
 import (
 	"io"
 	"io/fs"
-	"testing/fstest"
 )
 
 type Post struct {
 	Title string
 }
 
-func NewPostsFromFS(fileSystem fstest.MapFS) ([]Post, error) {
+func NewPostsFromFS(fileSystem fs.FS) ([]Post, error) {
 	dir, err := fs.ReadDir(fileSystem, ".")
 
 	if err != nil {
