@@ -52,6 +52,7 @@ func TestHoursInRadians(t *testing.T) {
 		angle float64
 	}{
 		{simpleTime(6, 0, 0), math.Pi},
+		{simpleTime(0, 0, 0), 0},
 	}
 
 	for _, c := range cases {
