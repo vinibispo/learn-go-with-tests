@@ -19,6 +19,10 @@ func minutesInRadians(t time.Time) float64 {
 		(math.Pi / (30 / float64(t.Minute())))
 }
 
+func hoursInRadians(t time.Time) float64 {
+	return math.Pi
+}
+
 func angleToPoint(angle float64) Point {
 	x := math.Sin(angle)
 	y := math.Cos(angle)
