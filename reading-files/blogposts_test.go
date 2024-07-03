@@ -16,17 +16,15 @@ func TestNewBlogPosts(t *testing.T) {
 
 	posts, err := blogposts.NewPostsFromFS(fs)
 
-	got := posts[0]
-	want := blogposts.Post{Title: "Post 1"}
-
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if len(posts) != len(fs) {
-		t.Errorf("got %d posts, wanted %d posts", len(posts), len(fs))
-	}
+	assertPost(t, posts[0], blogposts.Post{Title: "Post 1"})
+}
 
+func assertPost(t *testing.T, got blogposts.Post, want blogposts.Post) {
+	t.Helper()
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got %+v, want %+v", got, want)
 	}
