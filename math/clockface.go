@@ -20,7 +20,7 @@ func minutesInRadians(t time.Time) float64 {
 }
 
 func hoursInRadians(t time.Time) float64 {
-	return (math.Pi / (6 / float64(t.Hour())))
+	return (math.Pi / (6 / float64(t.Hour()%12)))
 }
 
 func angleToPoint(angle float64) Point {
