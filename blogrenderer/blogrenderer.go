@@ -13,7 +13,7 @@ type Post struct {
 
 var (
 	//go:embed "templates/*"
-  postTemplates embed.FS
+	postTemplates embed.FS
 )
 
 func Render(w io.Writer, p Post) error {
@@ -23,7 +23,7 @@ func Render(w io.Writer, p Post) error {
 		return err
 	}
 
-	if err := templ.Execute(w, p); err != nil {
+	if err := templ.ExecuteTemplate(w, "blog.gohtml", p); err != nil {
 		return err
 	}
 

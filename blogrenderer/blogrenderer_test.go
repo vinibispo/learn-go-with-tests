@@ -22,9 +22,9 @@ func TestRender(t *testing.T) {
 		buf := bytes.Buffer{}
 
 		if err := blogrenderer.Render(&buf, aPost); err != nil {
-      t.Fatal(err)
-    }
+			t.Fatal(err)
+		}
 
-    approvals.VerifyString(t, buf.String())
+		approvals.VerifyString(t, buf.String())
 	})
 }
