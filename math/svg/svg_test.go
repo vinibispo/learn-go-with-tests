@@ -1,4 +1,4 @@
-package clockface_test
+package svg_test
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	clockface "github.com/vinibispo/learn-go-with-tests/math"
+	. "github.com/vinibispo/learn-go-with-tests/math/svg"
 )
 
 type Svg struct {
@@ -52,7 +52,7 @@ func TestSVGWriterSecondHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			Write(&b, c.time)
 
 			svg := Svg{}
 			xml.Unmarshal(b.Bytes(), &svg)
@@ -78,7 +78,7 @@ func TestSVGWriterMinuteHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			Write(&b, c.time)
 
 			svg := Svg{}
 			xml.Unmarshal(b.Bytes(), &svg)
@@ -104,7 +104,7 @@ func TestSVGWriterHourHand(t *testing.T) {
 	for _, c := range cases {
 		t.Run(testName(c.time), func(t *testing.T) {
 			b := bytes.Buffer{}
-			clockface.SVGWriter(&b, c.time)
+			Write(&b, c.time)
 
 			svg := Svg{}
 			xml.Unmarshal(b.Bytes(), &svg)
