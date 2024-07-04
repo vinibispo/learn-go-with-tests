@@ -39,9 +39,9 @@ func TestFind(t *testing.T) {
 	}
 	t.Run("Find the best programmer", func(t *testing.T) {
 		people := []Person{
-			Person{Name: "Kent Beck"},
-			Person{Name: "Martin Fowler"},
-			Person{Name: "Chris James"},
+			{Name: "Kent Beck"},
+			{Name: "Martin Fowler"},
+			{Name: "Chris James"},
 		}
 
 		king, found := Find(people, func(p Person) bool {
