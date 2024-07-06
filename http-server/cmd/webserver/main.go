@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	poker "github.com/vinibispo/learn-go-with-tests/http-server"
 )
 
 const dbFileName = "game.db.json"
@@ -15,11 +17,11 @@ func main() {
 		log.Fatalf("problem opening %s %v", dbFileName, err)
 	}
 
-	store, err := NewFileSystemPlayerStore(db)
+	store, err := poker.NewFileSystemPlayerStore(db)
 	if err != nil {
 		log.Fatalf("problem creating file system player store, %v ", err)
 	}
-	server := NewPlayerServer(store)
+	server := poker.NewPlayerServer(store)
 
 	//setting 8000 because MacOS Control Center uses 5000
 	if err := http.ListenAndServe(":8000", server); err != nil {
