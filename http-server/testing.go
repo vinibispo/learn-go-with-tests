@@ -1,8 +1,10 @@
 package poker
 
 import (
+	"fmt"
 	"slices"
 	"testing"
+	"time"
 )
 
 type StubPlayerStore struct {
@@ -22,6 +24,23 @@ func (s *StubPlayerStore) RecordWin(name string) {
 
 func (s *StubPlayerStore) GetLeague() League {
 	return s.league
+}
+
+type ScheduledAlert struct {
+	At     time.Duration
+	Amount int
+}
+
+func (s ScheduledAlert) String() string {
+	return fmt.Sprintf("%d chimps at %v", s.Amount, s.At)
+}
+
+type SpyBlindAlerter struct {
+	Alerts []ScheduledAlert
+}
+
+func (s *SpyBlindAlerter) ScheduleAlertAt(at time.Duration, amount int) {
+	s.Alerts = append(s.Alerts, ScheduledAlert{at, amount})
 }
 
 func AssertPlayerWin(t testing.TB, store *StubPlayerStore, winner string) {
