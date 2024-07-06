@@ -38,6 +38,6 @@ func TestRecordingWinsAndRetrievingThem(t *testing.T) {
 			{"Pepper", 3},
 		}
 
-		assertLeague(t, got, want)
+		AssertLeague(t, got, want)
 	})
 }
