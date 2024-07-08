@@ -45,17 +45,23 @@ func (s *SpyBlindAlerter) ScheduleAlertAt(at time.Duration, amount int, to io.Wr
 }
 
 type GameSpy struct {
-	StartedWith  int
-	FinishedWith string
-	StartCalled  bool
+	StartCalled     bool
+	StartCalledWith int
+	BlindAlert      []byte
+
+	FinishedCalled   bool
+	FinishCalledWith string
 }
 
 func (g *GameSpy) Start(numberOfPlayers int, out io.Writer) {
-	g.StartedWith = numberOfPlayers
+	g.StartCalled = true
+	g.StartCalledWith = numberOfPlayers
+	out.Write(g.BlindAlert)
 }
 
 func (g *GameSpy) Finish(winner string) {
-	g.FinishedWith = winner
+	g.FinishedCalled = true
+	g.FinishCalledWith = winner
 }
 
 func AssertPlayerWin(t testing.TB, store *StubPlayerStore, winner string) {
