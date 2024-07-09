@@ -126,8 +126,6 @@ func TestGame(t *testing.T) {
 		writeWSMessage(t, ws, "3")
 		writeWSMessage(t, ws, winner)
 
-		time.Sleep(tenMS)
-
 		assertGameStartedWith(t, game, 3)
 		assertFinishCalledWith(t, game, winner)
 
@@ -232,4 +230,14 @@ func assertStatus(t testing.TB, got *httptest.ResponseRecorder, want int) {
 	if got.Code != want {
 		t.Errorf("did not get correct status, got %d want %d", got.Code, want)
 	}
+}
+
+func retryUntil(d time.Duration, f func() bool) bool {
+	deadline := time.Now().Add(d)
+	for time.Now().Before(deadline) {
+		if f() {
+			return true
+		}
+	}
+	return false
 }

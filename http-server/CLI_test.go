@@ -5,6 +5,7 @@ import (
 	"io"
 	"strings"
 	"testing"
+	"time"
 
 	poker "github.com/vinibispo/learn-go-with-tests/http-server"
 )
@@ -85,14 +86,22 @@ func assertGameNotStarted(t testing.TB, game *poker.GameSpy) {
 
 func assertGameStartedWith(t testing.TB, game *poker.GameSpy, numberOfPlayersWanted int) {
 	t.Helper()
-	if game.StartCalledWith != numberOfPlayersWanted {
+
+	passed := retryUntil(500*time.Millisecond, func() bool {
+		return game.StartCalledWith == numberOfPlayersWanted
+	})
+	if !passed {
 		t.Errorf("wanted Start called with %d but got %d", numberOfPlayersWanted, game.StartCalledWith)
 	}
 }
 
 func assertFinishCalledWith(t testing.TB, game *poker.GameSpy, winner string) {
 	t.Helper()
-	if game.FinishCalledWith != winner {
+
+	passed := retryUntil(500*time.Millisecond, func() bool {
+		return game.FinishCalledWith == winner
+	})
+	if !passed {
 		t.Errorf("expected finish called with %q but got %q", winner, game.FinishCalledWith)
 	}
 }
